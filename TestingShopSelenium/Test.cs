@@ -3,11 +3,20 @@ using OpenQA.Selenium.Firefox;
 
 namespace TestingShopSelenium
 {
+    [TestFixture]
     public class Tests
     {
-        public static void TestSpaceshipAdd()
+        private IWebDriver driver;
+
+        [SetUp]
+        public void Initialize()
         {
-            IWebDriver driver = new FirefoxDriver();
+            driver = new FirefoxDriver();
+        }
+
+        [Test]
+        public void TestSpaceshipAdd()
+        {
             driver.Url = "https://localhost:7246/";
 
             IWebElement idOfLinkElement = driver.FindElement(By.Id("spaceship"));
@@ -24,26 +33,15 @@ namespace TestingShopSelenium
             ifOfCreateSubmitButton.Click();
 
             IWebElement idOfTestData1 = driver.FindElement(By.Id("TestIdSpaceshipName"));
-            var nameindex = idOfTestData1.Text;
-            Assert.That(nameindex, Is.EqualTo("TestName"));
+            Assert.That(idOfTestData1.Text, Is.EqualTo("TestName"));
 
             IWebElement idOfTestData2 = driver.FindElement(By.Id("TestIdSpaceshipClassification"));
-            var powerindex = idOfTestData2.Text;
-            Assert.That(powerindex, Is.EqualTo("TestClassification"));
-
-            //IWebElement idOfTestData3 = driver.FindElement(By.Id("TestIdSpaceshipBuildDate"));
-            //var dateindex = idOfTestData3.GetAttribute("value");
-            //Assert.That(dateindex, Is.EqualTo("value"));
+            Assert.That(idOfTestData2.Text, Is.EqualTo("TestClassification"));
 
             IWebElement idOfTestData4 = driver.FindElement(By.Id("TestIdSpaceshipCrew"));
-            var drewindex = idOfTestData4.Text;
-            Assert.That(drewindex, Is.EqualTo("1234"));
+            Assert.That(idOfTestData4.Text, Is.EqualTo("1234"));
 
-            //IWebElement idOfTestData5 = driver.FindElement(By.Id("TestIdEnginPower"));
-            //var enginindex = idOfTestData5.Text;
-            //Assert.That(enginindex, Is.EqualTo("4321"));
             Console.WriteLine("Test passed");
-
         }
 
         private static void InsertSpaceshipData(IWebDriver driver)
@@ -68,6 +66,17 @@ namespace TestingShopSelenium
 
 
 
+        }
+
+        [TearDown]
+        public void Cleanup()
+        {
+            if (driver != null)
+            {
+                driver.Quit();
+                driver.Dispose();
+                driver = null;
+            }
         }
     }
 }
