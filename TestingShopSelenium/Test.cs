@@ -15,7 +15,7 @@ namespace TestingShopSelenium
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
         }
 
-        [Test, Order(1)]
+        [Test]
         public void TestSpaceshipAdd()
         {
             driver.Url = "https://localhost:7246/";
@@ -44,6 +44,7 @@ namespace TestingShopSelenium
 
             Console.WriteLine("Test passed");
         }
+        
 
         //same data but invalid
         [Test]
@@ -70,7 +71,7 @@ namespace TestingShopSelenium
         }
 
         //details data matches inserted data test
-        [Test, Order(2)]
+        [Test]
         public void TestSpaceshipDetails()
         {
 
@@ -97,7 +98,7 @@ namespace TestingShopSelenium
         }
 
         //update data test
-        [Test, Order(3)]
+        [Test]
         public void TestSpaceshipUpdate()
         {
             driver.Url = "https://localhost:7246/";
@@ -153,7 +154,7 @@ namespace TestingShopSelenium
         }
 
         //delete test
-        [Test, Order(4)]
+        [Test]
         public void TestSpaceshipDelete()
         {
             driver.Url = "https://localhost:7246/";
